@@ -152,6 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GurobiTestProj.cpp" />
+    <ClCompile Include="SupportLib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SupportLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

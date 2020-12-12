@@ -28,10 +28,15 @@
 #include <sstream>
 using namespace std;
 
+#include "SupportLib.h";
+
 int
 main(int argc,
     char* argv[])
 {
+    cout << SupportLib::fatorial(6) << endl;
+    SupportLib::leArquivo();
+
     int n = 5;
     int m = 5;
     double c[] = { 0.5, 0.8, 0.5, 0.1, -1 };
