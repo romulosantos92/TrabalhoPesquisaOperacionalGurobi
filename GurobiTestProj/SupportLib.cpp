@@ -96,10 +96,9 @@ int SupportLib::N(erlangRegister e)
     return agents;
 }
 
-int SupportLib::erlang(erlangRegister e)
+double SupportLib::erlang(erlangRegister e)
 {
-    int probability, divider;
-    double dividend, sum = 0;
+    double probability, dividend, divider, sum = 0;
 
     dividend = ((pow(A(e),N(e)) / SupportLib::fatorial(N(e))) * ((N(e)) / (N(e) - A(e))));
 
@@ -109,6 +108,7 @@ int SupportLib::erlang(erlangRegister e)
     }
 
     divider = ((sum) + (dividend));
+    probability = dividend / divider;
 
     try {
         probability = dividend / divider;
@@ -117,22 +117,14 @@ int SupportLib::erlang(erlangRegister e)
     {
         cout << "Divisão por zero" << endl;
     }
-    
     return probability;
 }
 
-int SupportLib::serviceLevel(erlangRegister e)
+double SupportLib::serviceLevel(erlangRegister e)
 {
     double serviceLevel, euler, x;
-    cout << endl << "targetAnswerTimeSeconds: " << e.targetAnswerTimeSeconds << endl;
-    cout << endl << "averageHandlingTimeMinutes: " << e.averageHandlingTimeMinutes << endl;
-    cout << endl << "primeiro: " << (N(e) - A(e)) << endl;
-    cout << endl << "erlang: " << erlang(e) << endl;
     x = ((N(e) - A(e)) * (e.targetAnswerTimeSeconds / (double)(e.averageHandlingTimeMinutes*60)));
     euler = exp(1);
-    cout << endl << "X: " << x << endl;
-    cout << endl << "euler: " << euler << endl;
     serviceLevel = (1 - (erlang(e) * exp(-1*x)));
-    cout << endl << "serviceLevel: " << serviceLevel << endl;
     return serviceLevel;
 }

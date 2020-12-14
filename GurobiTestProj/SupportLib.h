@@ -29,8 +29,8 @@ class SupportLib
 		static int fatorial(int n);
 		static int A(erlangRegister e);
 		static int N(erlangRegister e);
-		static int erlang(erlangRegister e);
-		static int serviceLevel(erlangRegister e);
+		static double erlang(erlangRegister e);
+		static double serviceLevel(erlangRegister e);
 
 	private:
 };
