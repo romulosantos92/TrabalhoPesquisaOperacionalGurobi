@@ -27,6 +27,7 @@
 #include "gurobi_c++.h"
 #include <sstream>
 using namespace std;
+#include <list>;
 
 #include "SupportLib.h";
 
@@ -35,7 +36,12 @@ main(int argc,
     char* argv[])
 {
     cout << SupportLib::fatorial(6) << endl;
-    SupportLib::leArquivo();
+    list<erlangRegister> listaRegistros = SupportLib::leArquivo();
+
+    cout << SupportLib::erlang(listaRegistros.back());
+    cout << SupportLib::serviceLevel(listaRegistros.back());
+
+    cout << endl << "Tamanho: " <<  listaRegistros.size() << endl;
 
     int n = 5;
     int m = 5;

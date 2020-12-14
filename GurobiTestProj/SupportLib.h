@@ -24,9 +24,14 @@ struct erlangRegister
 class SupportLib
 {
 	public:
-		static void leArquivo();
+		static list<erlangRegister> leArquivo();
 		static void printRegister(erlangRegister e);
 		static int fatorial(int n);
+		static int A(erlangRegister e);
+		static int N(erlangRegister e);
+		static int erlang(erlangRegister e);
+		static int serviceLevel(erlangRegister e);
+
 	private:
 };
 #endif //SUPPORTLIB_H
