@@ -77,7 +77,7 @@ int SupportLib::fatorial(int n)
         return n*SupportLib::fatorial(n - 1);
 }
 
-int SupportLib::A(erlangRegister e)
+double SupportLib::A(erlangRegister e)
 {
     if (e.periodOfMinutes != 60)
     {
@@ -90,19 +90,19 @@ int SupportLib::A(erlangRegister e)
     return erlang;
 }
 
-int SupportLib::N(erlangRegister e)
+double SupportLib::N(erlangRegister e)
 {
     int agents = A(e)+1;
     return agents;
 }
 
-double SupportLib::erlang(erlangRegister e)
+double SupportLib::erlang(erlangRegister e, double N)
 {
     double probability, dividend, divider, sum = 0;
 
-    dividend = ((pow(A(e),N(e)) / SupportLib::fatorial(N(e))) * ((N(e)) / (N(e) - A(e))));
+    dividend = ((pow(A(e),N) / SupportLib::fatorial(N)) * ((N) / (N - A(e))));
 
-    for (int i=0; i<=(N(e)-1); i++)
+    for (int i=0; i<=(N-1); i++)
     {
         sum += ((pow(A(e), i)) / (SupportLib::fatorial(i)));
     }
@@ -120,11 +120,24 @@ double SupportLib::erlang(erlangRegister e)
     return probability;
 }
 
-double SupportLib::serviceLevel(erlangRegister e)
+double SupportLib::serviceLevel(erlangRegister e, double N)
 {
     double serviceLevel, euler, x;
-    x = ((N(e) - A(e)) * (e.targetAnswerTimeSeconds / (double)(e.averageHandlingTimeMinutes*60)));
+    x = ((N - A(e)) * (e.targetAnswerTimeSeconds / (double)(e.averageHandlingTimeMinutes*60)));
     euler = exp(1);
-    serviceLevel = (1 - (erlang(e) * exp(-1*x)));
+    serviceLevel = (1 - (erlang(e,N) * exp(-1*x)));
     return serviceLevel;
+}
+
+double SupportLib::verificaServiceLevel(erlangRegister e)
+{
+    double newN = N(e);
+
+    while (serviceLevel(e, newN) < e.requiredServiceLevel)
+    {
+        newN += 1;
+        erlang(e, newN);
+        serviceLevel(e, newN);
+    }
+    return serviceLevel(e, newN);
 }

@@ -38,8 +38,9 @@ main(int argc,
     cout << SupportLib::fatorial(6) << endl;
     list<erlangRegister> listaRegistros = SupportLib::leArquivo();
 
-    cout << endl << "Erlang: " << SupportLib::erlang(listaRegistros.back());
-    cout << endl << "Service Level: " << SupportLib::serviceLevel(listaRegistros.back()) << endl << endl;
+    cout << endl << "Erlang: " << SupportLib::erlang(listaRegistros.back(),SupportLib::N(listaRegistros.back()));
+    cout << endl << "Service Level: " << SupportLib::serviceLevel(listaRegistros.back(),SupportLib::N(listaRegistros.back())) << endl<< endl;
+    cout << "Novo ServiceLevel: " << SupportLib::verificaServiceLevel(listaRegistros.back()) << endl << endl;
 
     int n = 5;
     int m = 5;
