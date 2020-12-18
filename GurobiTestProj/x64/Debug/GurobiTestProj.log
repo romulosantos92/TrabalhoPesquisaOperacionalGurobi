@@ -1,0 +1,4 @@
+﻿  GurobiTestProj.cpp
+D:\Programming Projects\Visual studio\TrabalhoPesquisaOperacionalGurobi-Luis\TrabalhoPesquisaOperacionalGurobi-Luis\GurobiTestProj\GurobiTestProj.cpp(30,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+D:\Programming Projects\Visual studio\TrabalhoPesquisaOperacionalGurobi-Luis\TrabalhoPesquisaOperacionalGurobi-Luis\GurobiTestProj\GurobiTestProj.cpp(32,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+  GurobiTestProj.vcxproj -> D:\Programming Projects\Visual studio\TrabalhoPesquisaOperacionalGurobi-Luis\TrabalhoPesquisaOperacionalGurobi-Luis\x64\Debug\GurobiTestProj.exe

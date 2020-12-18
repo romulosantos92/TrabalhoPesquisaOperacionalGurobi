@@ -27,11 +27,11 @@ class SupportLib
 		static list<erlangRegister> leArquivo();
 		static void printRegister(erlangRegister e);
 		static int fatorial(int n);
-		static double A(erlangRegister e);
-		static double N(erlangRegister e);
-		static double erlang(erlangRegister e, double N);
-		static double serviceLevel(erlangRegister e, double N);
-		static double verificaServiceLevel(erlangRegister e);
+		static int A(erlangRegister e);
+		static int N(erlangRegister e);
+		static double erlang(erlangRegister e);
+		static double serviceLevel(erlangRegister e);
+		static int somaVetorInt(int* vetor, int tam);
 
 	private:
 };

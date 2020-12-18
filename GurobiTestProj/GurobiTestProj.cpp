@@ -35,25 +35,140 @@ int
 main(int argc,
     char* argv[])
 {
-    cout << SupportLib::fatorial(6) << endl;
     list<erlangRegister> listaRegistros = SupportLib::leArquivo();
+    int restricoesErlang[24] = { 
+        50, 200, 80, 120, 50, 80, 
+        300, 100, 130, 170, 140, 900, 
+        700, 1200, 1500, 1300, 900, 800, 
+        900, 700, 500, 400, 100, 30 };
 
-    cout << endl << "Erlang: " << SupportLib::erlang(listaRegistros.back(),SupportLib::N(listaRegistros.back()));
-    cout << endl << "Service Level: " << SupportLib::serviceLevel(listaRegistros.back(),SupportLib::N(listaRegistros.back())) << endl<< endl;
-    cout << "Novo ServiceLevel: " << SupportLib::verificaServiceLevel(listaRegistros.back()) << endl << endl;
 
-    int n = 5;
-    int m = 5;
-    double c[] = { 0.5, 0.8, 0.5, 0.1, -1 };
-    double A[][5] = { {0, 0, 0, 1, -1},
-                      {0, 0, 1, 1, -1},
-                      {1, 1, 0, 0, -1},
-                      {1, 0, 1, 0, -1},
-                      {1, 0, 0, 1, -1} };
-    int npts = 5;
-    double xpts[] = { -1, 0, 0, 0, 1 };
-    double ypts[] = { 2, 1, 0, 1, 2 };
+    double MatrizQuadroHorarios6Horas[24][24] = 
+    {   {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
+        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+        {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, };
 
+    /*
+    
+    */
+
+    //Cria um ambiente vazio
+    GRBEnv ambiente = new GRBEnv(true);
+    ambiente.start();
+
+    GRBModel modelo = GRBModel(ambiente);
+    GRBModel modelo2 = GRBModel(ambiente);
+
+    GRBVar funcionariosIniciandoTurno[24];
+    for (int i = 0; i < 24; i++)
+    {
+        funcionariosIniciandoTurno[i] =  modelo.addVar(0.0, numeric_limits<double>::max(), 0.0, GRB_INTEGER);
+    }
+
+    try {
+        modelo.setObjective(
+        funcionariosIniciandoTurno[0] + funcionariosIniciandoTurno[1] + 
+        funcionariosIniciandoTurno[2] + funcionariosIniciandoTurno[3] + 
+        funcionariosIniciandoTurno[4] + funcionariosIniciandoTurno[5] + 
+        funcionariosIniciandoTurno[6] + funcionariosIniciandoTurno[7] + 
+        funcionariosIniciandoTurno[8] + funcionariosIniciandoTurno[9] + 
+        funcionariosIniciandoTurno[10] + funcionariosIniciandoTurno[11] + 
+        funcionariosIniciandoTurno[12] + funcionariosIniciandoTurno[13] + 
+        funcionariosIniciandoTurno[14] + funcionariosIniciandoTurno[15] + 
+        funcionariosIniciandoTurno[16] + funcionariosIniciandoTurno[17] + 
+        funcionariosIniciandoTurno[18] + funcionariosIniciandoTurno[19] + 
+        funcionariosIniciandoTurno[20] + funcionariosIniciandoTurno[21] + 
+        funcionariosIniciandoTurno[22] + funcionariosIniciandoTurno[23], GRB_MINIMIZE);
+    }
+    catch (GRBException e)
+    {
+        std::cout << endl << "Lascou:" << e.getMessage() << endl;
+    }
+    
+    try {
+        for (int i = 0; i < 24; i++)
+        {
+            modelo.addConstr(
+                funcionariosIniciandoTurno[0] * MatrizQuadroHorarios6Horas[0][i] +
+                funcionariosIniciandoTurno[1] * MatrizQuadroHorarios6Horas[1][i] +
+                funcionariosIniciandoTurno[2] * MatrizQuadroHorarios6Horas[2][i] +
+                funcionariosIniciandoTurno[3] * MatrizQuadroHorarios6Horas[3][i] +
+                funcionariosIniciandoTurno[4] * MatrizQuadroHorarios6Horas[4][i] +
+                funcionariosIniciandoTurno[5] * MatrizQuadroHorarios6Horas[5][i] +
+                funcionariosIniciandoTurno[6] * MatrizQuadroHorarios6Horas[6][i] +
+                funcionariosIniciandoTurno[7] * MatrizQuadroHorarios6Horas[7][i] +
+                funcionariosIniciandoTurno[8] * MatrizQuadroHorarios6Horas[8][i] +
+                funcionariosIniciandoTurno[9] * MatrizQuadroHorarios6Horas[9][i] +
+                funcionariosIniciandoTurno[10] * MatrizQuadroHorarios6Horas[10][i] +
+                funcionariosIniciandoTurno[11] * MatrizQuadroHorarios6Horas[11][i] +
+                funcionariosIniciandoTurno[12] * MatrizQuadroHorarios6Horas[12][i] +
+                funcionariosIniciandoTurno[13] * MatrizQuadroHorarios6Horas[13][i] +
+                funcionariosIniciandoTurno[14] * MatrizQuadroHorarios6Horas[14][i] +
+                funcionariosIniciandoTurno[15] * MatrizQuadroHorarios6Horas[15][i] +
+                funcionariosIniciandoTurno[16] * MatrizQuadroHorarios6Horas[16][i] +
+                funcionariosIniciandoTurno[17] * MatrizQuadroHorarios6Horas[17][i] +
+                funcionariosIniciandoTurno[18] * MatrizQuadroHorarios6Horas[18][i] +
+                funcionariosIniciandoTurno[19] * MatrizQuadroHorarios6Horas[19][i] +
+                funcionariosIniciandoTurno[20] * MatrizQuadroHorarios6Horas[20][i] +
+                funcionariosIniciandoTurno[21] * MatrizQuadroHorarios6Horas[21][i] +
+                funcionariosIniciandoTurno[22] * MatrizQuadroHorarios6Horas[22][i] +
+                funcionariosIniciandoTurno[23] * MatrizQuadroHorarios6Horas[23][i] 
+                >= restricoesErlang[i]);
+        }
+    }
+    catch (GRBException e)
+    {
+        std::cout << endl << "Lascou: " << e.getMessage() << endl;
+    }
+
+    std::cout << endl << "Quase la" << endl;
+    modelo.optimize();
+    GRBVar* solucao = modelo.getVars();
+
+    try {
+        for(int i=0; i<24; i++)
+        cout << solucao[i].get(GRB_StringAttr_VarName) << " "
+            << solucao[i].get(GRB_DoubleAttr_X) << endl;
+    }
+    catch (GRBException e)
+    {
+        std::cout << endl << "Lascou:" << e.getMessage() << endl;
+    }
+    std::cout << endl << "Agora foi" << endl;
+    std::cout << (int)modelo.get(GRB_DoubleAttr_ObjVal);
+
+    GRBVar** matrizFuncionarios = new GRBVar*[(int)modelo.get(GRB_DoubleAttr_ObjVal)];
+    for (int i = 0; i < (int)modelo.get(GRB_DoubleAttr_ObjVal); i++)
+        matrizFuncionarios[i] = new GRBVar[24];
+
+    for (int i = 0; i < (int)modelo.get(GRB_DoubleAttr_ObjVal); i++)
+    {
+        for (int j = 0; j < 24; j++)
+            matrizFuncionarios[i][j] = modelo2.addVar(0.0, 1.0, 0.0, GRB_BINARY);
+    }
+
+    /*
     GRBEnv* env = 0;
     GRBVar* x = 0;
     GRBVar* y = 0;
@@ -117,5 +232,7 @@ main(int argc,
     delete[] x;
     delete[] y;
     delete env;
+
+    */
     return 0;
 }
